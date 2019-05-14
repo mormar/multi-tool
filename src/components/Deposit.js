@@ -1,5 +1,43 @@
 import React, { useState } from "react";
-import "../App.css";
+import { Button, Input, Label, Select } from "../elements";
+import styled from "styled-components";
+
+const Main = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  .main {
+    display: flex;
+  }
+  .left {
+    // flex: 50%;
+    margin: 0px 25px 0 0;
+  }
+  .right {
+    flex: 50%;
+    margin: 5px 0 0 25px;
+    .title {
+      font-size: 2em;
+      margin: 0;
+    }
+    .details {
+      font-size: 1.5em;
+      margin: 10px 0;
+    }
+  }
+  .main-title {
+    font-size: 3em;
+    margin: 30px 10px;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .row-inside {
+    display: flex;
+    flex-direction: column;
+    flex: 50%;
+  }
+`;
 
 const initialState = {
   seedMoney: 0,
@@ -86,9 +124,9 @@ const Depoosit = () => {
   }
 
   return (
-    <div className="main">
+    <Main>
       <h1 className="main-title">Investment Calculator</h1>
-      <div className="test">
+      <div className="main">
         <form
           className="left"
           onSubmit={e => {
@@ -105,75 +143,61 @@ const Depoosit = () => {
         >
           <div className="row">
             <div className="row-inside">
-              <label className="title">Seed Money</label>
-              <input
-                className="value"
+              <Label>Seed Money</Label>
+              <Input
                 type="number"
                 onChange={e => setSeedMoney(e.target.value)}
                 value={seedMoney}
               />
             </div>
             <div className="row-inside">
-              <label className="title">Coupon Rate (%)</label>
-              <input
-                className="value"
+              <Label>Coupon Rate (%)</Label>
+              <Input
                 type="number"
                 onChange={e => setCouponRate(e.target.value)}
                 value={couponRate}
               />
             </div>
             <div className="row-inside">
-              <label className="title">Period of the deposit</label>
-              <input
-                className="value"
+              <Label>Period of the deposit</Label>
+              <Input
                 type="number"
                 onChange={e => setPeriodOfTheDeposit(e.target.value)}
                 value={periodOfTheDeposit}
               />
-              <div className="menu">
-                  <select onChange={(e) => setPeriod(e.target.value)} defaultValue={12}>
-                    <option value={365}>Days</option>
-                    <option value={12}>Months</option>
-                    <option value={1}>Years</option>
-                  </select>
-                  {/* {console.log("peirod: ", period)} */}
-              </div>
+                <Select
+                  onChange={e => setPeriod(e.target.value)}
+                  defaultValue={12}
+                >
+                  <option value={365}>Days</option>
+                  <option value={12}>Months</option>
+                  <option value={1}>Years</option>
+                </Select>
             </div>
             <div className="row-inside">
-              <label className="title">Number of capitalization per yera</label>
-              <div className="menu">
-                  <select onChange={(e) => setNumberCapitalizationPerYera(e.target.value)}>
-                    <option value={1}>
-                      At the end of the period
-                    </option>
-                    <option value={1}>
-                      Annual
-                    </option>
-                    <option value={12}>
-                      Monthly
-                    </option>
-                    <option value={365}>
-                      Daily
-                    </option>
-                  </select>
-                {/* {console.log("numberCapitalizationPerYera:", numberCapitalizationPerYera)} */}
-              </div>
+              <Label>Number of capitalization per year</Label>
+                <Select
+                  onChange={e => setNumberCapitalizationPerYera(e.target.value)}
+                >
+                  <option value={1}>At the end of the period</option>
+                  <option value={1}>Annual</option>
+                  <option value={12}>Monthly</option>
+                  <option value={365}>Daily</option>
+                </Select>
+              
             </div>
             <div className="row-inside">
-              <input
-                className="calculate"
-                type="submit"
-                value="Calculate"
+              <Button
+                modifiers={["submit"]}
                 onClick={() => setCalculate(!calculate)}
-              />
+              >
+                Calculate
+              </Button>
             </div>
           </div>
-          {/* {console.log("periodMenu", periodMenu)} */}
         </form>
-        {/* {console.log(seedMoney)} */}
-        {/* {console.log("period: ", period)} */}
         <div className="right">
-          <h2>Final Capital : {finalCapital === "" ? 0 : finalCapital}zł</h2>
+          <h2 className="title">Final Capital : {finalCapital === "" ? 0 : finalCapital}zł</h2>
           <div className="more-info">
             <h3 className="details">Gross: {gross === "" ? 0 : gross}zł</h3>
             <h3 className="details">Profit: {net === "" ? 0 : net}zł</h3>
@@ -181,10 +205,7 @@ const Depoosit = () => {
           </div>
         </div>
       </div>
-      {/* {console.log(seedMoney)} */}
-      {/* <h1>{count(seedMoney, couponRate, numberCapitalizationPerYera, periodOfTheDeposit)}</h1> */}
-      {/* <button>Submit</button> */}
-    </div>
+    </Main>
   );
 };
 
