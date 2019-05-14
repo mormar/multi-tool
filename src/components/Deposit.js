@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 
 const initialState = {
@@ -29,8 +29,6 @@ const Depoosit = () => {
   const [gross, setGross] = useState(initialState.gross);
   const [tax, setTax] = useState(initialState.tax);
 
-  const [periodMenu, setPeriodMenu] = useState(false);
-  const [numOfCapMenu, setNumOfCapMenu] = useState(false);
   const [calculate, setCalculate] = useState(false);
 
   const [period, setPeriod] = useState(initialState.period);
@@ -41,23 +39,7 @@ const Depoosit = () => {
     numberCapitalizationPerYera,
     periodOfTheDeposit
   ) {
-    console.log("*******");
-    console.log("period: ", period);
-    // console.log("seedMoney typeof ", typeof seedMoney);
-    // console.log("seedMoney ", seedMoney);
-    // console.log("seedMoney parseFloat ", parseFloat(seedMoney));
-    // console.log("seedMoney typeof ", typeof seedMoney);
-
     const _seedMoney = parseFloat(seedMoney);
-    // console.log("_seedMoneyest", _seedMoney);
-    // console.log("_seedMoney ", typeof _seedMoney);
-
-    // console.log("seedMoney", typeof(couponRate));
-    // console.log("seedMoney", couponRate);
-
-    // console.log("couponRate", couponRate);
-    // console.log("numberCapitalizationPerYera", numberCapitalizationPerYera);
-    // console.log("periodOfTheDeposit", periodOfTheDeposit);
 
     const finalCapital =
       _seedMoney *
@@ -75,7 +57,7 @@ const Depoosit = () => {
 
     const sum = parseFloat(net) + parseFloat(finalTax);
     const grossNum = parseFloat(gross);
-    const final = finalCapital.toFixed(2);
+    // const final = finalCapital.toFixed(2);
 
     const all = finalCapital - tax;
 
@@ -84,16 +66,16 @@ const Depoosit = () => {
     } else {
       console.log("Wrong");
     }
-
-    console.log("finalCapital: ", finalCapital);
-    console.log("final: ", final);
-    console.log("tax: ", tax);
-    console.log("profit: ", profit);
-    console.log("gross: ", gross);
-    console.log("net: ", net);
-    console.log("finalTax: ", finalTax);
-    console.log("sum: ", sum);
-    console.log("all: ", all);
+    // console.log all calculation
+    // console.log("finalCapital: ", finalCapital);
+    // console.log("final: ", final);
+    // console.log("tax: ", tax);
+    // console.log("profit: ", profit);
+    // console.log("gross: ", gross);
+    // console.log("net: ", net);
+    // console.log("finalTax: ", finalTax);
+    // console.log("sum: ", sum);
+    // console.log("all: ", all);
 
     setFinalCapital(all);
     setNet(net);
@@ -110,7 +92,7 @@ const Depoosit = () => {
         <form
           className="left"
           onSubmit={e => {
-            e.preventDefault(); // Zapobiega odświezaniu strony po przesłaniu formularza
+            e.preventDefault(); // Prevent refresh after send form
             if (calculate) {
               count(
                 seedMoney,
@@ -140,8 +122,6 @@ const Depoosit = () => {
                 value={couponRate}
               />
             </div>
-            {/* </div> */}
-            {/* <div className="row"> */}
             <div className="row-inside">
               <label className="title">Period of the deposit</label>
               <input
@@ -151,29 +131,17 @@ const Depoosit = () => {
                 value={periodOfTheDeposit}
               />
               <div className="menu">
-                {/* <button onClick={() => setPeriodMenu(!periodMenu)}>
-                  Capitalization
-                </button> */}
-
-                {/* {periodMenu ? ( */}
                   <select onChange={(e) => setPeriod(e.target.value)} defaultValue={12}>
                     <option value={365}>Days</option>
                     <option value={12}>Months</option>
                     <option value={1}>Years</option>
                   </select>
-                  {console.log("peirod: ", period)}
-                {/* ) : (
-                  <div />
-                )} */}
+                  {/* {console.log("peirod: ", period)} */}
               </div>
             </div>
             <div className="row-inside">
               <label className="title">Number of capitalization per yera</label>
               <div className="menu">
-                {/* <button onClick={() => setNumOfCapMenu(!numOfCapMenu)}>
-                  Number of capitalization
-                </button>
-                {numOfCapMenu ? ( */}
                   <select onChange={(e) => setNumberCapitalizationPerYera(e.target.value)}>
                     <option value={1}>
                       At the end of the period
@@ -188,8 +156,7 @@ const Depoosit = () => {
                       Daily
                     </option>
                   </select>
-                {/* ) : null} */}
-                {console.log("numberCapitalizationPerYera:", numberCapitalizationPerYera)}
+                {/* {console.log("numberCapitalizationPerYera:", numberCapitalizationPerYera)} */}
               </div>
             </div>
             <div className="row-inside">
@@ -201,16 +168,7 @@ const Depoosit = () => {
               />
             </div>
           </div>
-
           {/* {console.log("periodMenu", periodMenu)} */}
-          {/* <div className="row">
-            <input
-              className="calculate"
-              type="submit"
-              value="Calculate"
-              onClick={() => setCalculate(!calculate)}
-            />
-          </div> */}
         </form>
         {/* {console.log(seedMoney)} */}
         {/* {console.log("period: ", period)} */}
@@ -221,7 +179,6 @@ const Depoosit = () => {
             <h3 className="details">Profit: {net === "" ? 0 : net}zł</h3>
             <h3 className="details">Tax: {tax === "" ? 0 : tax}zł</h3>
           </div>
-         
         </div>
       </div>
       {/* {console.log(seedMoney)} */}
