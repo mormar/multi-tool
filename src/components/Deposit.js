@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Button, Input, Label, Select } from "../elements";
 import styled from "styled-components";
+import { above } from "../utilities"
 
 const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   .main {
+    
+    ${above.desktop`
     display: flex;
+    `}
   }
   .left {
-    // flex: 50%;
     margin: 0px 25px 0 0;
   }
   .right {

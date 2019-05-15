@@ -12,7 +12,6 @@ export const Select = styled.select`
   padding: 0 10px;
   cursor: pointer;
   height: 60px;
-  overflow: hidden;
   ${roboto};
   &:hover {
     ${shadows[2]};

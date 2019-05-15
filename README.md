@@ -27,3 +27,5 @@ The main goal of this project is learning and raising awareness of how to effici
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br/>
 [Google Fonts](https://fonts.google.com/specimen/Roboto?selection.family=Roboto) <br/>
 [styled components](https://www.styled-components.com/) <br/>
+[React Router](https://reacttraining.com/react-router/) <br/>
+
