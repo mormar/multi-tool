@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import { Button, Input, Label, Select } from "../elements";
 import styled from "styled-components";
-import { above } from "../utilities"
+import { above } from "../utilities";
+import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   .main {
-    
     ${above.desktop`
     display: flex;
     `}
   }
   .left {
-    margin: 0px 25px 0 0;
+    flex: 60%;
+    ${above.desktop`
+      margin: 0px 25px 0 0;
+    `}
   }
   .right {
-    flex: 50%;
-    margin: 5px 0 0 25px;
+    flex: 40%;
+    margin: 0px 10px;
+    ${above.desktop`
+      margin: 5px 0 0 25px;
+    `}
     .title {
       font-size: 2em;
       margin: 0;
@@ -40,6 +46,14 @@ const Main = styled.div`
     flex-direction: column;
     flex: 50%;
   }
+`;
+
+const Chart = styled.div`
+  max-width: 100%;
+  height: 150px;
+  ${above.desktop`
+  height: 300px;
+  `}
 `;
 
 const initialState = {
@@ -98,7 +112,7 @@ const Depoosit = () => {
 
     const sum = parseFloat(net) + parseFloat(finalTax);
     const grossNum = parseFloat(gross);
-    // const final = finalCapital.toFixed(2);
+    const final = finalCapital.toFixed(2);
 
     const all = finalCapital - tax;
 
@@ -118,13 +132,20 @@ const Depoosit = () => {
     // console.log("sum: ", sum);
     // console.log("all: ", all);
 
-    setFinalCapital(all);
+    setFinalCapital(final);
     setNet(net);
     setGross(gross);
     setTax(finalTax);
 
     return finalCapital;
   }
+  const data = [
+    { name: "finalCapital", value: parseFloat(finalCapital) },
+    { name: "tax", value: parseFloat(tax) },
+    { name: "net", value: parseFloat(net) }
+  ];
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
   return (
     <Main>
@@ -168,26 +189,25 @@ const Depoosit = () => {
                 onChange={e => setPeriodOfTheDeposit(e.target.value)}
                 value={periodOfTheDeposit}
               />
-                <Select
-                  onChange={e => setPeriod(e.target.value)}
-                  defaultValue={12}
-                >
-                  <option value={365}>Days</option>
-                  <option value={12}>Months</option>
-                  <option value={1}>Years</option>
-                </Select>
+              <Select
+                onChange={e => setPeriod(e.target.value)}
+                defaultValue={12}
+              >
+                <option value={365}>Days</option>
+                <option value={12}>Months</option>
+                <option value={1}>Years</option>
+              </Select>
             </div>
             <div className="row-inside">
               <Label>Number of capitalization per year</Label>
-                <Select
-                  onChange={e => setNumberCapitalizationPerYera(e.target.value)}
-                >
-                  <option value={1}>At the end of the period</option>
-                  <option value={1}>Annual</option>
-                  <option value={12}>Monthly</option>
-                  <option value={365}>Daily</option>
-                </Select>
-              
+              <Select
+                onChange={e => setNumberCapitalizationPerYera(e.target.value)}
+              >
+                <option value={1}>At the end of the period</option>
+                <option value={1}>Annual</option>
+                <option value={12}>Monthly</option>
+                <option value={365}>Daily</option>
+              </Select>
             </div>
             <div className="row-inside">
               <Button
@@ -200,11 +220,33 @@ const Depoosit = () => {
           </div>
         </form>
         <div className="right">
-          <h2 className="title">Final Capital : {finalCapital === "" ? 0 : finalCapital}zł</h2>
+          <h2 className="title">
+            Final Capital : {finalCapital === "" ? 0 : finalCapital}zł
+          </h2>
           <div className="more-info">
-            <h3 className="details">Gross: {gross === "" ? 0 : gross}zł</h3>
-            <h3 className="details">Profit: {net === "" ? 0 : net}zł</h3>
-            <h3 className="details">Tax: {tax === "" ? 0 : tax}zł</h3>
+            <Chart>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie dataKey="value" data={data} paddingAngle={10} label>
+                    {data.map((entry, index) => (
+                      <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+            </Chart>
+            {seedMoney === 0 ||
+            couponRate === 0 ||
+            periodOfTheDeposit === 0 ||
+            gross === "" ? (
+              ""
+            ) : (
+              <div>
+                <h3 className="details">Gross: {gross === "" ? 0 : gross}zł</h3>
+                <h3 className="details">Profit: {net === "" ? 0 : net}zł</h3>
+                <h3 className="details">Tax: {tax === "" ? 0 : tax}zł</h3>
+              </div>
+            )}
           </div>
         </div>
       </div>
