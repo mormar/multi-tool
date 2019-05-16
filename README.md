@@ -14,8 +14,6 @@ The main goal of this project is learning and raising awareness of how to effici
 * Add animations
 * Add calendar features 
 * Add tests
-* Add react router
-* Add chart
 * ... and a lot more
 
 ## How to run the project in development mode:
@@ -28,4 +26,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [Google Fonts](https://fonts.google.com/specimen/Roboto?selection.family=Roboto) <br/>
 [styled components](https://www.styled-components.com/) <br/>
 [React Router](https://reacttraining.com/react-router/) <br/>
-
+[Recharts](http://recharts.org/en-US) <br/>

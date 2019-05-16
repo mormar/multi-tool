@@ -112,9 +112,9 @@ const Depoosit = () => {
 
     const sum = parseFloat(net) + parseFloat(finalTax);
     const grossNum = parseFloat(gross);
-    const final = finalCapital.toFixed(2);
+    const final = (finalCapital- tax).toFixed(2);
 
-    const all = finalCapital - tax;
+    // const all = finalCapital - tax;
 
     if (grossNum === sum) {
       console.log("OK");
